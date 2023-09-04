@@ -6,21 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.affirmations.R
 import com.example.affirmations.model.Affirmation
 
 class ItemAdapter(
     private val context: Context,
-    private val dataset: List<Affirmation>
-    ): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+    private val dataset: List<Affirmation>,
+    private val onItemClickListener: OnItemClickListener):
+    RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        val textView: TextView = view.findViewById(R.id.item_title)
-        val imageView: ImageView = view.findViewById(R.id.item_image)
-    }
+            val textView: TextView = view.findViewById(R.id.item_title)
+            val imageView: ImageView = view.findViewById(R.id.item_image)
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout =
@@ -38,9 +37,16 @@ class ItemAdapter(
         holder.textView.text = context.resources.getString(item.stringResourceId)
         holder.imageView.setImageResource(item.imageResourceId)
 
-        holder.itemView.setOnClickListener {
-            Toast.makeText(context, "item clicked at: $position", Toast.LENGTH_SHORT).show()
+//        holder.itemView.setOnClickListener {
+//            Toast.makeText(context, "item clicked at: $position", Toast.LENGTH_SHORT).show()
+//        }
+        holder.itemView.setOnClickListener{
+            onItemClickListener.onItemClick(position)
         }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
     }
 }
 
