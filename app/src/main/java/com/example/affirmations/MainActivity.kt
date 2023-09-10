@@ -2,26 +2,65 @@ package com.example.affirmations
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
-import com.example.affirmations.adapter.ItemAdapter
-import com.example.affirmations.data.Datasource
+import android.util.Log
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.affirmations.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(),ItemAdapter.OnItemClickListener{
+const val TAG = "MainActivity"
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        Log.d(TAG, "onCreate Called")
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        //Initialize data
-        val myDataset = Datasource().loadAffirmations()
+        val listFragment = ListFragment()
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        recyclerView.adapter = ItemAdapter(this,myDataset,this)
-        recyclerView.setHasFixedSize(true)
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.activity_main, listFragment).commit()
     }
-    override fun onItemClick(position: Int) {
-         Toast.makeText(this,"item clicked at $position",Toast.LENGTH_LONG).show()
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart Called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart Called")
     }
 }
+
+
+
+
+
+
+
+
 
