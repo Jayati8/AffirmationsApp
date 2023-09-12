@@ -18,10 +18,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Create an instance of the ListFragment
         val listFragment = ListFragment()
 
+        // Get the FragmentManager
         val fragmentManager: FragmentManager = supportFragmentManager
+
+        // Start a new FragmentTransaction
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+        // Replace the existing fragment in the "activity_main" container with the new ListFragment
         fragmentTransaction.replace(R.id.activity_main, listFragment).commit()
     }
 
