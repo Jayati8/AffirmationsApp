@@ -1,4 +1,4 @@
-package com.example.affirmations.model
+package broadcastReceiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -6,12 +6,12 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.view.View
-import com.example.affirmations.MainActivity
+import com.example.affirmations.SplashActivity
 import com.google.android.material.snackbar.Snackbar
 
 @Suppress("DEPRECATION")
 // Define a BroadcastReceiver that listens for network connectivity changes.
-class NetworkChangeReceiver(private val rootView: View, private  val context: MainActivity) : BroadcastReceiver() {
+class NetworkChangeReceiver(private val rootView: View, private val context: SplashActivity) : BroadcastReceiver() {
 
     // This function is called when a broadcast intent is received.
     override fun onReceive(context: Context?, intent: Intent?) {
